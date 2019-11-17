@@ -23,7 +23,7 @@ public class BrandService {
         Example example = new Example(Brand.class);
         //搜索关键字
         if (StringUtils.isNotBlank(key)){
-            example.createCriteria().andLike("name","%"+key+"%").orEqualTo("letter",key);
+            example.createCriteria().orLike("name","%"+key+"%").orEqualTo("letter",key.toUpperCase());
         }
         //排序
         if (StringUtils.isNotBlank(sortBy)){

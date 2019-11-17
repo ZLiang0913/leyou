@@ -18,6 +18,15 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+    /**
+     * 分页查询品牌
+     * @param page
+     * @param rows
+     * @param sortBy
+     * @param desc
+     * @param key
+     * @return
+     */
     @GetMapping("page")
     public ResponseEntity<PageResult<Brand>> queryBrandByPage(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
