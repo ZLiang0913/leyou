@@ -17,3 +17,20 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${server.port}
+
+ly:
+  upload:
+    baseUrl: http://47.103.11.80/
+    allowTypes:
+      - image/png
+      - image/jpeg
+      - image/bmp
+
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 47.103.11.80:22122
