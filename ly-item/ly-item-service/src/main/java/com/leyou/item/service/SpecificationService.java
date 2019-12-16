@@ -24,4 +24,19 @@ public class SpecificationService {
         }
         return specGroupList;
     }
+
+    public void saveGroup(SpecGroup specGroup) {
+        int insert = specGroupMapper.insert(specGroup);
+        if (insert!=1){
+            throw new LyException(ExceptionEnum.SPEC_REATE_ERROR);
+        }
+    }
+
+    public void deleteGroupById(Long id) {
+        specGroupMapper.deleteByPrimaryKey(id);
+    }
+
+    public void updateGroup(SpecGroup specGroup) {
+        specGroupMapper.updateByPrimaryKey(specGroup);
+    }
 }
