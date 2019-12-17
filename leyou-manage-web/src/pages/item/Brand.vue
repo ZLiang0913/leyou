@@ -29,7 +29,7 @@
           <v-btn icon @click="editBrand(props.item)">
             <i class="el-icon-edit"/>
           </v-btn>
-          <v-btn icon @click="deleteBrand(props.item)">
+          <v-btn icon @click="deleteBrand(props.item.id)">
             <i class="el-icon-delete"/>
           </v-btn>
         </td>
@@ -142,7 +142,13 @@
         this.getDataFromServer();
         // 关闭窗口
         this.show = false;
+      },
+      deleteBrand(id){
+        this.$http.delete("/item/brand/" + id).then(() => {
+          this.$message.success("删除成功！")
+        })
       }
+
     },
     components:{
         BrandForm
