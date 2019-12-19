@@ -62,4 +62,17 @@ public class BrandService {
         }
 
     }
+
+    /**
+     * 根据品牌id获取品牌name
+     * @param id
+     * @return
+     */
+    public Brand queryById(Long id){
+        Brand brand = brandMapper.selectByPrimaryKey(id);
+        if (brand ==null ){
+            throw new LyException(ExceptionEnum.BRAND_CREATE_ERROR);
+        }
+        return brand;
+    }
 }

@@ -12,6 +12,7 @@ public enum ExceptionEnum {
     SPEC_GROUP_NOT_FOUND(404,"商品规格组不存在"),
     SPEC_PARAM_NOT_FOUND(404,"商品规格参数不存在"),
     CATEGORY_NOT_FOUND(404,"商品分类没查到"),
+    GOODS_NOT_FOUND(404,"商品没查到"),
     BRAND_CREATE_ERROR(500,"新增品牌失败"),
     SPEC_CREATE_ERROR(500,"新增规格组失败"),
     SPEC_PARAM_CREATE_ERROR(500,"新增规格参数失败"),
