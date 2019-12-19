@@ -10,6 +10,7 @@ import com.leyou.item.pojo.Brand;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -71,8 +72,23 @@ public class BrandService {
     public Brand queryById(Long id){
         Brand brand = brandMapper.selectByPrimaryKey(id);
         if (brand ==null ){
-            throw new LyException(ExceptionEnum.BRAND_CREATE_ERROR);
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
         }
         return brand;
+
+    }
+
+    /**
+     * 根据品牌分类中间表，通过分类id查找品牌
+     * @param cid
+     * @return
+     */
+    public List<Brand> queryBrandByCid(Long cid) {
+
+        List<Brand> brands = brandMapper.queryBrandByCategoryId(cid);
+        if (CollectionUtils.isEmpty(brands)){
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return brands;
     }
 }
