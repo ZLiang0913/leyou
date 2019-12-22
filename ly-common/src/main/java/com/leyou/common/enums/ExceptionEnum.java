@@ -17,6 +17,7 @@ public enum ExceptionEnum {
     BRAND_CREATE_ERROR(500,"新增品牌失败"),
     SPEC_CREATE_ERROR(500,"新增规格组失败"),
     SPEC_PARAM_CREATE_ERROR(500,"新增规格参数失败"),
+    GOODS_INSERT_ERROR(500,"新增商品失败"),
     ;
     private int code;
     private String msg;
