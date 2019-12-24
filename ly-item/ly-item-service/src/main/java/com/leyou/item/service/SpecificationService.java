@@ -45,9 +45,12 @@ public class SpecificationService {
         specGroupMapper.updateByPrimaryKey(specGroup);
     }
 
-    public List<SpecParam> queryParamByGid(Long gid) {
+    public List<SpecParam> queryParam(Long gid, Long cid, Boolean generic, Boolean searching) {
         SpecParam specParam = new SpecParam();
         specParam.setGroupId(gid);
+        specParam.setCid(cid);
+        specParam.setGeneric(generic);
+        specParam.setSearching(searching);
         List<SpecParam> specParamList = specParamMapper.select(specParam);
 
         if (CollectionUtils.isEmpty(specParamList)){

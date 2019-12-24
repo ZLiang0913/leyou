@@ -6,6 +6,7 @@ import com.leyou.item.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,13 +64,22 @@ public class SpecificationController {
     }
 
     /**
-     * 根据组id查询参数
-     * @param gid
+     * 查询规格参数
+     * @param gid 组id
+     * @param cid 分类id
+     * @param generic 是否全局
+     * @param searching 是否搜索
      * @return
      */
     @GetMapping("params")
-    public ResponseEntity<List<SpecParam>>  queryParamByGid(@RequestParam("gid") Long gid){
-        return ResponseEntity.ok(specificationService.queryParamByGid(gid));
+    public ResponseEntity<List<SpecParam>> queryParamByGid(
+            @RequestParam(value = "gid",required = false) Long gid,
+            @RequestParam(value = "cid",required = false) Long cid,
+            @RequestParam(value = "generic",required = false)Boolean generic,
+            @RequestParam(value = "searching",required = false)Boolean searching){
+
+        List<SpecParam>  params = specificationService.queryParam(gid,cid,generic,searching);
+        return ResponseEntity.ok(params);
     }
 
     @PostMapping("param")

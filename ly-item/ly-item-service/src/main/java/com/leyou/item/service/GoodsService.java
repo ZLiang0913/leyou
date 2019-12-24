@@ -105,7 +105,13 @@ public class GoodsService {
             throw new LyException(ExceptionEnum.GOODS_INSERT_ERROR);
         }
 
-        //存放stock
+        //新增sku和stock
+        saveSkuAndStock(spu);
+
+    }
+
+    private void saveSkuAndStock(Spu spu) {
+        int count;//存放stock
         List<Stock> stockList = new ArrayList<>();
         //新增sku
         List<Sku> skus = spu.getSkus();
@@ -151,5 +157,33 @@ public class GoodsService {
             sku.setStock(stockMapper.selectByPrimaryKey(sku.getId()).getStock());
         }
         return skuList;
+    }
+
+    public void updateGoods(Spu spu) {
+        Sku sku = new Sku();
+        sku.setSpuId(spu.getId());
+        //查询sku
+        List<Sku> skuList = skuMapper.select(sku);
+        if (!CollectionUtils.isEmpty(skuList)){
+            List<Long> ids = skuList.stream().map(Sku::getId).collect(Collectors.toList());
+            //删除sku
+            skuMapper.delete(sku);
+            //删除stock
+            stockMapper.deleteByIdList(ids);
+        }
+
+        //修改spu
+        spu.setLastUpdateTime(new Date());
+        spu.setCreateTime(null);
+        spu.setValid(null);
+        spu.setSaleable(null);
+        spuMapper.updateByPrimaryKeySelective(spu);
+        //修改detail
+        spuDetailMapper.updateByPrimaryKeySelective(spu.getSpuDetail());
+
+        //新增sku和stock
+        saveSkuAndStock(spu);
+
+
     }
 }
