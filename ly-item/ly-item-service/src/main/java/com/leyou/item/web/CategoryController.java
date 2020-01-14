@@ -40,5 +40,14 @@ public class CategoryController {
 
     }
 
+    /**
+     * 根据id获取分类
+    * @param ids
+     * @return
+     */
+    @GetMapping("list/ids")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(categoryService.queryListByIds(ids));
+    }
 
 }
