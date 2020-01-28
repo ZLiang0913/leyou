@@ -7,10 +7,12 @@ import com.leyou.item.pojo.SpuDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@RequestMapping()
 public interface GoodsApi {
     /**
      * 分页查询spu信息
@@ -21,7 +23,7 @@ public interface GoodsApi {
      * @return
      */
     @GetMapping("/spu/page")
-    public PageResult<Spu> querySpuByPage(
+    PageResult<Spu> querySpuByPage(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "5") Integer rows,
             @RequestParam(value = "saleable", required = false) Boolean saleable,
